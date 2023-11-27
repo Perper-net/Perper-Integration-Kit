@@ -1,6 +1,3 @@
-Creating an ERP integration document for your `Perper-Integration-Kit` on GitHub involves outlining the necessary steps and details for integrating Perper.net's payment system into an ERP (Enterprise Resource Planning) system. Below is a structured outline for your document:
-
----
 
 # Perper.net ERP Integration Guide
 
