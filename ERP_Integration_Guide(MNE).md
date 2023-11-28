@@ -14,7 +14,7 @@ Da biste započeli proces integracije, potrebno je da obezbijedite sljedeće inf
 Nakon kreiranja projekta, dobićete:
 
 - **ID Projekta**
-- **Tajna Projekta**
+- **Security Code Projekta**
 
 Ovi podaci su ključni za proces integracije i verifikaciju transakcija.
 
@@ -24,7 +24,7 @@ Za uspješnu integraciju sa vašim ERP sistemom, potrebno je:
 
 - **API Endpoint**: URL vašeg backend-a.
 - **ID Projekta**: Pruža Perper.net.
-- **Tajna Projekta**: Pruža Perper.net.
+- **Security Code Projekta**: Pruža Perper.net.
 
 ## Obrada Transakcija
 
@@ -70,12 +70,12 @@ Da biste kreirali QR kod za Perper plaćanja, koristite JSON string u ovom forma
 
 ### Proces Verifikacije
 
-Polje `data` će biti poslato nazad na vaš API Endpoint, zajedno sa potpisanim JWT koji sadrži polje `hash`, koristeći vašu Tajnu Projekta. Koristite ova polja (`data` i `hash`) da potvrdite da li je zahtjev zaista od nas ili se radi o pokušaju prevare.
+Polje `data` će biti poslato nazad na vaš API Endpoint, zajedno sa potpisanim JWT koji sadrži polje `hash`, koristeći vaš Security Code Projekta. Koristite ova polja (`data` i `hash`) da potvrdite da li je zahtjev zaista od nas ili se radi o pokušaju prevare.
 
 ## Sigurnost i Validacija
 
-- Osigurajte sigurnost vašeg ID-a Projekta i Tajne Projekta.
-- Validirajte svaku transakciju poređenjem polja `data` i `hash` sa vašom Tajnom Projekta.
+- Osigurajte sigurnost vašeg ID-a Projekta i Security Code Projekta.
+- Validirajte svaku transakciju poređenjem polja `data` i `hash` sa vašim Security Code Projekta.
 
 ## Podrška
 
