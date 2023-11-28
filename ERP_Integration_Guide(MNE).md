@@ -1,7 +1,7 @@
 
 # Vodič za Integraciju Perper.net sa ERP Sistemom
 
-Ovaj vodič pruža detaljna uputstva za integraciju sistema za plaćanje stabilnom valutom Perper.net u vaš sistem za Planiranje Resursa Preduzeća (ERP). Slijedite ove korake za efikasno postavljanje i upravljanje transakcijama.
+Ovaj vodič pruža detaljna uputstva za integraciju sistema za plaćanje stabilnom valutom Perper u vaš ERP sistem. Slijedite ove korake za efikasno postavljanje i upravljanje transakcijama.
 
 ## Početak
 
