@@ -5,7 +5,7 @@ Ovaj vodič pruža detaljna uputstva za integraciju sistema za plaćanje stabiln
 
 ## Početak
 
-Da biste započeli proces integracije, potrebno je da obezbijedite sljedeće informacije za kreiranje projekta na Perper.net:
+Da biste započeli proces integracije, potrebno je da obezbijedite sljedeće informacije za kreiranje projekta na Perper.net - https://sdk.perper.net:
 
 1. **Ime Projekta**: Naziv vašeg projekta.
 2. **Redirect URL**: URL na koji će korisnici biti preusmjereni nakon transakcije.
