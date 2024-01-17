@@ -5,7 +5,7 @@ This guide provides detailed instructions for integrating Perper.net's stablecoi
 
 ## Getting Started
 
-To begin the integration process, you need to provide the following information to create a project on Perper.net:
+To begin the integration process, you need to provide the following information to create a project on Perper.net - sdk.perper.net:
 
 1. **Project Name**: The name of your project.
 2. **Redirect URL**: The URL where users will be redirected after a transaction.
