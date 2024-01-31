@@ -60,13 +60,15 @@ To create a QR code for Perper payments, use a JSON string in this format:
 {
   "amount": number,
   "projectId": "string",
-  "data": "string"
+  "data": "string",
+  "customId": "string"
 }
 ```
 
 - `amount`: The amount of Perper to be sent.
 - `projectId`: Your Project ID.
 - `data`: A string (can be randomly generated or an internal transaction ID) used later for verification.
+- `customId` (optional): For ability to check the status of the transaction via the API. **NEEDS** to be unique
 
 ### Verification Process
 
@@ -76,6 +78,45 @@ The `data` field will be sent back to your API Endpoint, along with a signed JWT
 
 - Ensure the security of your Project ID and Project Secret.
 - Validate each transaction by comparing the `data` and `hash` fields with your Project Secret.
+
+## Checking if a transaction was successful with `customId`
+
+If you've added the `customId` field when creating the QR Code, you can use it to see if the transaction was successful. You do that by sending a POST request to `https://backend.perper.net/sdk/transaction/checkStatus` with this kind of JSON body:
+
+```json
+{
+  "projectId": "YOUR_PROJECT_ID",
+  "customId": "UniqueTransactionId123",
+  "hash": "HASHED_VALUE"
+}
+```
+
+The `hash` field needs to be a `jwt` token signed with the project `secret`. The  payload must be JSON containing the `projectId` and `customId` fields, and they need to be the same as the ones that will be sent to the endpoint above.
+
+
+### Response
+
+If the request was successful the response will look like this:
+
+```json
+{
+  "type": "success",
+  "data": {
+    // Whether the transaction was successful or not
+    "successful": true | false
+  }
+}
+```
+
+And if the request wasn't successful the response will look like this:
+```json
+{
+  "type": "error",
+  "error": {
+    "type": "SomeErrorType"
+  }
+}
+```
 
 ## Support
 

@@ -60,13 +60,15 @@ Da biste kreirali QR kod za Perper plaćanja, koristite JSON string u ovom forma
 {
   "amount": number,
   "projectId": "string",
-  "data": "string"
+  "data": "string",
+  "customId": "string"
 }
 ```
 
 - `amount`: Količina Perpera koja treba biti poslata.
 - `projectId`: Vaš ID Projekta.
 - `data`: String (može biti nasumično generisan ili vaš interni ID transakcije) koji će kasnije biti korišćen za verifikaciju.
+- `customId` (opcionalno): Za mogućnost provjere statusa transakcije preko API poziva. Id **MORA** biti unikatan.
 
 ### Proces Verifikacije
 
@@ -76,6 +78,45 @@ Polje `data` će biti poslato nazad na vaš API Endpoint, zajedno sa potpisanim 
 
 - Osigurajte sigurnost vašeg ID-a Projekta i Security Code Projekta.
 - Validirajte svaku transakciju poređenjem polja `data` i `hash` sa vašim Security Code Projekta.
+
+## Provjera da li je transakcija bila uspešna sa `customId` poljem
+
+Ako ste dodali `customId` polje tokom kreiranja QR koda, možete ga iskoristiti da provjerite da li je transakcija bila uspešna. To radite tako što šaljete POST poziv na `https://backend.perper.net/sdk/transaction/checkStatus` sa ovim tipom JSON tijela:
+
+```json
+{
+  "projectId": "VAS_PROJECT_ID",
+  "customId": "UnikatanTransactionId123",
+  "hash": "HASHED_VRIJEDNOST"
+}
+```
+
+Polje `hash` mora biti `jwt` token potpisan sa tajnom projekta. Vrijednost koja se potpisuje mora biti JSON koji sadrži `projectId` i `customId` polja sa istim vrijednostima koje želite poslati na API.
+
+
+### Response
+
+Ako je zahtjev bio usjpešan odgovor će ovako izgledati:
+
+```json
+{
+  "type": "success",
+  "data": {
+    // Da li je transakcija bila uspješna ili ne
+    "successful": true | false
+  }
+}
+```
+
+A ako zahtjev nije bio usjpešan odgovor će ovako izgledati:
+```json
+{
+  "type": "error",
+  "error": {
+    "type": "SomeErrorType"
+  }
+}
+```
 
 ## Podrška
 
