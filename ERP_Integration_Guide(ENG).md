@@ -59,14 +59,14 @@ To create a QR code for Perper payments, use a JSON string in this format:
 ```json
 {
   "amount": number,
-  "projectId": "string",
+  "project": "string",
   "data": "string",
   "customId": "string"
 }
 ```
 
 - `amount`: The amount of Perper to be sent.
-- `projectId`: Your Project ID.
+- `project`: Your Project ID.
 - `data`: A string (can be randomly generated or an internal transaction ID) used later for verification.
 - `customId` (optional): For ability to check the status of the transaction via the API. **NEEDS** to be unique
 
@@ -91,7 +91,21 @@ If you've added the `customId` field when creating the QR Code, you can use it t
 }
 ```
 
-The `hash` field needs to be a `jwt` token signed with the project `secret`. The  payload must be JSON containing the `projectId` and `customId` fields, and they need to be the same as the ones that will be sent to the endpoint above.
+The `hash` field needs to be a `jwt` token signed with the project `secret`. The JWT token payload must be JSON containing the `projectId` and `customId` fields, and they need to be the same as the ones that will be sent to the endpoint above.
+
+Example in `JavaScript` with the `jsonwebtoken` package:
+
+```js
+// If you are using ES6+
+import jwt from 'jsonwebtoken';
+
+// If you are not using ES6+
+const jws = require('jsonwebtoken');
+
+...
+
+const hash = jwt.sign({projectId: "YOUR_PROJECT_ID", customId: "UniqueTransactionId123"}, "YOUR_PROJECT_SECRET");
+```
 
 
 ### Response

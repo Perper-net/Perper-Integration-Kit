@@ -59,14 +59,14 @@ Da biste kreirali QR kod za Perper plaćanja, koristite JSON string u ovom forma
 ```json
 {
   "amount": number,
-  "projectId": "string",
+  "project": "string",
   "data": "string",
   "customId": "string"
 }
 ```
 
 - `amount`: Količina Perpera koja treba biti poslata.
-- `projectId`: Vaš ID Projekta.
+- `project`: Vaš ID Projekta.
 - `data`: String (može biti nasumično generisan ili vaš interni ID transakcije) koji će kasnije biti korišćen za verifikaciju.
 - `customId` (opcionalno): Za mogućnost provjere statusa transakcije preko API poziva. Id **MORA** biti unikatan.
 
@@ -93,6 +93,19 @@ Ako ste dodali `customId` polje tokom kreiranja QR koda, možete ga iskoristiti 
 
 Polje `hash` mora biti `jwt` token potpisan sa tajnom projekta. Vrijednost koja se potpisuje mora biti JSON koji sadrži `projectId` i `customId` polja sa istim vrijednostima koje želite poslati na API.
 
+Primjer u `JavaScript` jeziku sa `jsonwebtoken` bibliotekom:
+
+```js
+// Ako koristite ES6+
+import jwt from 'jsonwebtoken';
+
+// Ako ne koristite ES6+
+const jws = require('jsonwebtoken');
+
+...
+
+const hash = jwt.sign({projectId: "VAS_PROJECT_ID", customId: "UnikatanTransactionId123"}, "TAJNA_VASEG_PROJEKTA");
+```
 
 ### Response
 
